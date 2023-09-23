@@ -89,5 +89,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 .DS_Store
+*.xcscheme
+LostAPI/Package.resolved
 *.xcworkspacedata
-LostAPI/.swiftpm/xcode/xcshareddata/xcschemes/LostAPI.xcscheme
