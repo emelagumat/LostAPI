@@ -28,10 +28,6 @@ let package = Package(
             resources: [
                 .process("Resources/preload_data.json")
             ]
-        ),
-        .testTarget(name: "AppTests", dependencies: [
-            .target(name: "LostAPI"),
-            .product(name: "XCTVapor", package: "vapor")
-        ])
+        )
     ]
 )

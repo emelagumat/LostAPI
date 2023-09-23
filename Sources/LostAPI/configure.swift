@@ -3,14 +3,6 @@ import Fluent
 import FluentSQLiteDriver
 import Vapor
 
-public func configure(_ app: Application) async throws {
-    app.http.server.configuration.port = 1337
-    app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
-
-    try await preloadData(in: app)
-    try routes(app)
-}
-
 public struct LostAPIEntry {
     public static func configure(_ app: Application) async throws {
         app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
