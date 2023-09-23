@@ -5,7 +5,7 @@ import Vapor
 struct EpisodeController: RouteCollection {
     let version: APIVersion
     
-    init(version: APIVersion = .v1) {
+    init(version: APIVersion) {
         self.version = version
     }
     

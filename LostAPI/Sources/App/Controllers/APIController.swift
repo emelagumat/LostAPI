@@ -16,7 +16,8 @@ struct APIController: RouteCollection {
         )
         
         let allRoutes: [RouteCollection] = [
-            EpisodeController(version: version)
+            EpisodeController(version: version),
+            CharacterController(version: version)
         ]
         
         try allRoutes.forEach {

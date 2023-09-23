@@ -5,6 +5,7 @@ enum Route {
     case api
     case version(APIVersion)
     case episodes
+    case characters
 }
 
 extension Route {
@@ -16,6 +17,8 @@ extension Route {
             aPIVersion.rawValue.asPathComponent
         case .episodes:
             "episodes"
+        case .characters:
+            "characters"
         }
     }
 }
