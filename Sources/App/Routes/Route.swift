@@ -12,7 +12,7 @@ extension Route {
     var pathComponent: PathComponent {
         switch self {
         case .api:
-            "api"
+            "lost/api"
         case .version(let aPIVersion):
             aPIVersion.rawValue.asPathComponent
         case .episodes:

@@ -11,6 +11,14 @@ public func configure(_ app: Application) async throws {
     try routes(app)
 }
 
+public struct LostAPIEntry {
+    public func configure(_ app: Application) async throws {
+        app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
+
+        try await preloadData(in: app)
+        try routes(app)
+    }
+}
 private func preloadData(in app: Application) async throws {
     do {
         let url = URL(fileURLWithPath: "preload_data.json")
