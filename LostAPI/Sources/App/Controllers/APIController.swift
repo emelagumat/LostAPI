@@ -11,10 +11,16 @@ struct APIController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         let apiRoute = routes.grouped(
-            "api",
-            version.rawValue.asPathComponent
+            .api,
+            .version(version)
         )
         
-        try apiRoute.register(collection: EpisodeController(version: version))
+        let allRoutes: [RouteCollection] = [
+            EpisodeController(version: version)
+        ]
+        
+        try allRoutes.forEach {
+            try apiRoute.register(collection: $0)
+        }
     }
 }

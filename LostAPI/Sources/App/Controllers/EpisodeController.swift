@@ -1,23 +1,6 @@
 
 import Fluent
 import Vapor
-import SQLiteNIO
-
-enum Route: String {
-    case episodes
-    
-    var pathComponent: PathComponent { rawValue.asPathComponent }
-}
-
-enum APIVersion: String {
-    case v1
-}
-
-extension String {
-    var asPathComponent: PathComponent {
-        "\(self)"
-    }
-}
 
 struct EpisodeController: RouteCollection {
     let version: APIVersion
@@ -27,11 +10,10 @@ struct EpisodeController: RouteCollection {
     }
     
     func boot(routes: RoutesBuilder) throws {
-        let episodesRoute = routes.grouped(
-            Route.episodes.pathComponent
-        )
+        let episodesRoute = routes.grouped(.episodes)
+        
         episodesRoute.get(use: getAll)
-        episodesRoute.get(":id", use: findById)
+        episodesRoute.get(.parameter(.id), use: findById)
     }
     
     func getAll(req: Request) throws -> EventLoopFuture<[Episode]> {
@@ -42,7 +24,7 @@ struct EpisodeController: RouteCollection {
     
     func findById(req: Request) throws -> EventLoopFuture<Episode> {
         Episode
-            .find(req.parameters.get("id"), on: req.db)
+            .find(req.parameters.get(.id), on: req.db)
             .unwrap(or: Abort(.notFound))
     }
 }

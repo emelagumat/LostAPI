@@ -2,7 +2,8 @@ import Fluent
 
 struct CreateEpisode: Migration {
     func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema(Episode.schema)
+        database
+            .schema(Episode.schema)
             .id()
             .field("title", .string, .required)
             .field("season", .int, .required)
@@ -11,7 +12,9 @@ struct CreateEpisode: Migration {
     }
 
     func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("episodes").delete()
+        database
+            .schema(Episode.schema)
+            .delete()
     }
 }
 
