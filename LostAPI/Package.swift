@@ -21,6 +21,9 @@ let package = Package(
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
                 .product(name: "Vapor", package: "vapor")
+            ],
+            resources: [
+                .process("Resources/preload_data.json")
             ]
         ),
         .testTarget(name: "AppTests", dependencies: [

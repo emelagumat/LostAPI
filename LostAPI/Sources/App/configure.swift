@@ -3,14 +3,16 @@ import Fluent
 import FluentSQLiteDriver
 import Vapor
 
-// configures your application
 public func configure(_ app: Application) async throws {
     app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
+    
+    try await preloadData(in: app)
+    try routes(app)
+}
 
-    let url = URL(fileURLWithPath: "preload_data.json")
+private func preloadData(in app: Application) async throws {
     do {
-        let urll = URL(fileURLWithPath: "Resources/preload_data.json")
-        print("💛 \(urll)")
+        let url = URL(fileURLWithPath: "preload_data.json")
         let data = try Data(contentsOf: url)
         let dataInfo = try JSONDecoder().decode(PreloadData.self, from: data)
         
@@ -30,8 +32,6 @@ public func configure(_ app: Application) async throws {
         print(error)
         print(error.localizedDescription)
     }
-    
-    try routes(app)
 }
 
 func loadInitialData(on database: Database) -> EventLoopFuture<Void> {
