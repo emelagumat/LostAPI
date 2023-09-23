@@ -19,7 +19,8 @@ private func preloadData(in app: Application) async throws {
 
         let migrations: [Migration] = [
             CreateEpisode(),
-            CreateCharacter()
+            CreateCharacter(),
+            CreateSeason()
         ]
 
         for table in migrations {
@@ -29,6 +30,7 @@ private func preloadData(in app: Application) async throws {
 
         try await preloadEpisodes(with: dataInfo, in: app.db)
         try await preloadCharacters(with: dataInfo, in: app.db)
+        try await preloadSeasons(with: dataInfo, in: app.db)
 
     } catch {
         print(error)
@@ -49,6 +51,14 @@ private func preloadEpisodes(with info: PreloadData, in db: Database) async thro
         CreateEpisode(),
         in: db,
         data: info.Episodes
+    )
+}
+
+private func preloadSeasons(with info: PreloadData, in db: Database) async throws {
+    try await preload(
+        CreateSeason(),
+        in: db,
+        data: info.Seasons
     )
 }
 

@@ -5,6 +5,7 @@ enum Route {
     case version(APIVersion)
     case episodes
     case characters
+    case seasons
 }
 
 extension Route {
@@ -18,6 +19,8 @@ extension Route {
             "episodes"
         case .characters:
             "characters"
+        case .seasons:
+            "seasons"
         }
     }
 }
