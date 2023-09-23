@@ -12,7 +12,7 @@ public func configure(_ app: Application) async throws {
 }
 
 public struct LostAPIEntry {
-    public func configure(_ app: Application) async throws {
+    public static func configure(_ app: Application) async throws {
         app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
 
         try await preloadData(in: app)

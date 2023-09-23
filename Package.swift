@@ -6,6 +6,9 @@ let package = Package(
     platforms: [
        .macOS(.v13)
     ],
+    products: [
+        .library(name: "LostAPI", targets: ["LostAPI"]),
+    ],
     dependencies: [
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.77.1"),
@@ -16,13 +19,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "LostAPI", dependencies: [
-                .product(name: "Fluent", package: "fluent"),
-                .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
-                .product(name: "Vapor", package: "vapor")
-        ]),
-        .executableTarget(
-            name: "App",
+            name: "LostAPI",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
@@ -33,7 +30,7 @@ let package = Package(
             ]
         ),
         .testTarget(name: "AppTests", dependencies: [
-            .target(name: "App"),
+            .target(name: "LostAPI"),
             .product(name: "XCTVapor", package: "vapor")
         ])
     ]
