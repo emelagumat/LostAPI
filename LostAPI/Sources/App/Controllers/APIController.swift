@@ -8,7 +8,6 @@ struct APIController: RouteCollection {
         self.version = version
     }
 
-
     func boot(routes: RoutesBuilder) throws {
         let apiRoute = routes.grouped(
             .api,
