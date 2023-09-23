@@ -1,4 +1,3 @@
-
 import Fluent
 
 struct CreateCharacter: Migration {
@@ -13,7 +12,7 @@ struct CreateCharacter: Migration {
             .field("description", .int)
             .create()
     }
-    
+
     func revert(on database: Database) -> EventLoopFuture<Void> {
         database
             .schema(LostCharacter.schema)

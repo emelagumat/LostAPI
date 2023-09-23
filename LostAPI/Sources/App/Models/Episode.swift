@@ -1,16 +1,15 @@
-
 import Fluent
 import Vapor
 
 final class Episode: Model, Content {
     static let schema = "episodes"
-    
+
     @ID(key: .id)
     var id: UUID?
 
     @Field(key: "title")
     var title: String
-    
+
     @Field(key: "season")
     var season: Int
 

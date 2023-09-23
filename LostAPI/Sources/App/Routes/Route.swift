@@ -1,4 +1,3 @@
-
 import Vapor
 
 enum Route {
@@ -9,7 +8,7 @@ enum Route {
 }
 
 extension Route {
-    var pathComponent: PathComponent { 
+    var pathComponent: PathComponent {
         switch self {
         case .api:
             "api"

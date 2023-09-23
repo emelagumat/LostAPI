@@ -1,4 +1,3 @@
-
 import Vapor
 
 enum RouteParameter: String {
