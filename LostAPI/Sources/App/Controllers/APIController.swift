@@ -19,6 +19,8 @@ struct APIController: RouteCollection {
             CharacterController(version: version)
         ]
 
+        //   new test
+
         try allRoutes.forEach {
             try apiRoute.register(collection: $0)
         }
