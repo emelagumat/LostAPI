@@ -2,6 +2,7 @@ import Vapor
 
 enum Route {
     case api
+    case lost
     case version(APIVersion)
     case episodes
     case characters
@@ -11,8 +12,10 @@ enum Route {
 extension Route {
     var pathComponent: PathComponent {
         switch self {
+        case .lost:
+            "lost"
         case .api:
-            "lost/api"
+            "api"
         case .version(let aPIVersion):
             aPIVersion.rawValue.asPathComponent
         case .episodes:
