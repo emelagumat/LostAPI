@@ -9,7 +9,7 @@ struct CreateCharacter: Migration {
             .field("surname", .string)
             .field("actorName", .string)
             .field("age", .int)
-            .field("description", .int)
+            .field("description", .string)
             .create()
     }
 
