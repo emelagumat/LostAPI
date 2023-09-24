@@ -10,6 +10,7 @@ struct APIController: RouteCollection {
 
     func boot(routes: RoutesBuilder) throws {
         let apiRoute = routes.grouped(
+            .lost,
             .api,
             .version(version)
         )

@@ -1,28 +1,47 @@
 import NIOSSL
 import Fluent
-import FluentSQLiteDriver
+import FluentPostgresDriver
 import Vapor
 
-public func configure(_ app: Application) async throws {
-    app.http.server.configuration.port = 1337
-    app.databases.use(DatabaseConfigurationFactory.sqlite(.file("db.sqlite")), as: .sqlite)
-
-    try await preloadData(in: app)
-    try routes(app)
+public struct LostAPIEntry {
+    public static func configure(_ app: Application) async throws {
+        if let databaseURL = Environment.get("DATABASE_URL") {
+            var tlsConfig: TLSConfiguration = .makeClientConfiguration()
+            tlsConfig.certificateVerification = .none
+            let nioSSLContext = try NIOSSLContext(configuration: tlsConfig)
+            
+            var postgresConfig = try SQLPostgresConfiguration(url: databaseURL)
+            postgresConfig.coreConfiguration.tls = .require(nioSSLContext)
+            
+            app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
+        } else {
+            app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
+                hostname: Environment.get("DATABASE_HOST") ?? "localhost",
+                port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? SQLPostgresConfiguration.ianaPortNumber,
+                username: Environment.get("DATABASE_USERNAME") ?? "manu",
+                password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
+                database: Environment.get("DATABASE_NAME") ?? "postgres",
+                tls: .prefer(try .init(configuration: .clientDefault)))
+            ), as: .psql)
+        }
+        
+        try await preloadData(in: app)
+        try routes(app)
+    }
 }
 
 private func preloadData(in app: Application) async throws {
     do {
-        let url = URL(fileURLWithPath: "preload_data.json")
+        let url = Bundle.module.url(forResource: "preload_data", withExtension: "json")!
         let data = try Data(contentsOf: url)
         let dataInfo = try JSONDecoder().decode(PreloadData.self, from: data)
-
+        
         let migrations: [Migration] = [
             CreateEpisode(),
             CreateCharacter(),
             CreateSeason()
         ]
-
+        
         for table in migrations {
             try? await table.prepare(on: app.db).get()
             app.migrations.add(table)
@@ -80,22 +99,5 @@ private func preload<T: Migration, U: Model>(
                 }
             }
             .get()
-    }
-}
-
-func loadInitialData(on database: Database) -> EventLoopFuture<Void> {
-    let fileURL = URL(fileURLWithPath: "path/to/initialData.json")
-
-    do {
-        let data = try Data(contentsOf: fileURL)
-        let episodes = try JSONDecoder().decode([Episode].self, from: data)
-
-        let saveFutures = episodes.map { episode in
-            return episode.save(on: database)
-        }
-
-        return EventLoopFuture<Void>.andAllSucceed(saveFutures, on: database.eventLoop)
-    } catch {
-        return database.eventLoop.makeFailedFuture(error)
     }
 }

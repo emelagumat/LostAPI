@@ -1,0 +1,80 @@
+{
+  "Characters": [
+    {
+      "id": "8e450e84-2c08-4c41-9e4e-9f16f9f72a2d",
+      "name": "Jack",
+      "surname": "Shephard",
+      "actorName": "Matthew Fox",
+      "age": 40,
+      "description": "Un cirujano que se convierte en el líder de los supervivientes."
+    },
+    {
+      "id": "c7cd3f89-4fad-4dab-a9f9-ea7bf40918f3",
+      "name": "Kate",
+      "surname": "Austen",
+      "actorName": "Evangeline Lilly",
+      "age": 35,
+      "description": "Una mujer en fuga de la ley."
+    }
+  ],
+  "Episodes": [
+    {
+      "id": "2d72d67b-5052-44e5-a11b-422b98d5c1e6",
+      "title": "Pilot: Part 1",
+      "season": 1,
+      "summary": "El vuelo Oceanic 815 se estrella en una isla."
+    },
+    {
+      "id": "3b4d0b1d-a1f1-46c9-a975-fd88219cb0c9",
+      "title": "Pilot: Part 2",
+      "season": 1,
+      "summary": "Los supervivientes exploran la isla."
+    },
+    {
+      "id": "173c63e4-b6f9-4321-9f1e-271406c98f51",
+      "title": "Tabula Rasa",
+      "season": 1,
+      "summary": "Kate ayuda a un herido."
+    },
+    {
+      "id": "e1ab7b63-64a7-4d92-9883-8e2f7b01e7b6",
+      "title": "Walkabout",
+      "season": 1,
+      "summary": "Locke va a cazar."
+    },
+    {
+      "id": "7f94bc19-9c4a-4ce1-a517-470ed098fc09",
+      "title": "White Rabbit",
+      "season": 1,
+      "summary": "Jack busca agua fresca."
+    }
+  ],
+  "Seasons": [
+    {
+      "id": "0d5d72b1-7a9c-4f56-89a4-63a3cf01f96b",
+      "number": 1,
+      "startDate": "2004-09-22",
+      "endDate": "2005-05-25",
+      "numberOfEpisodes": 25
+    },
+    {
+      "id": "ff25e3f4-ade5-4e40-8a85-29b3c6f16e1e",
+      "number": 2,
+      "startDate": "2005-09-21",
+      "endDate": "2006-05-24",
+      "numberOfEpisodes": 24
+    }
+  ],
+  "EpisodeCharacter": [
+    {"episode_id": "2d72d67b-5052-44e5-a11b-422b98d5c1e6", "character_id": "8e450e84-2c08-4c41-9e4e-9f16f9f72a2d"},
+    {"episode_id": "2d72d67b-5052-44e5-a11b-422b98d5c1e6", "character_id": "c7cd3f89-4fad-4dab-a9f9-ea7bf40918f3"},
+    {"episode_id": "3b4d0b1d-a1f1-46c9-a975-fd88219cb0c9", "character_id": "8e450e84-2c08-4c41-9e4e-9f16f9f72a2d"},
+    {"episode_id": "3b4d0b1d-a1f1-46c9-a975-fd88219cb0c9", "character_id": "173c63e4-b6f9-4321-9f1e-271406c98f51"},
+    {"episode_id": "173c63e4-b6f9-4321-9f1e-271406c98f51", "character_id": "c7cd3f89-4fad-4dab-a9f9-ea7bf40918f3"},
+    {"episode_id": "173c63e4-b6f9-4321-9f1e-271406c98f51", "character_id": "e1ab7b63-64a7-4d92-9883-8e2f7b01e7b6"},
+    {"episode_id": "e1ab7b63-64a7-4d92-9883-8e2f7b01e7b6", "character_id": "173c63e4-b6f9-4321-9f1e-271406c98f51"},
+    {"episode_id": "e1ab7b63-64a7-4d92-9883-8e2f7b01e7b6", "character_id": "7f94bc19-9c4a-4ce1-a517-470ed098fc09"},
+    {"episode_id": "7f94bc19-9c4a-4ce1-a517-470ed098fc09", "character_id": "8e450e84-2c08-4c41-9e4e-9f16f9f72a2d"},
+    {"episode_id": "7f94bc19-9c4a-4ce1-a517-470ed098fc09", "character_id": "c7cd3f89-4fad-4dab-a9f9-ea7bf40918f3"}
+  ]
+}
